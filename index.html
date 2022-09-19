@@ -5,37 +5,188 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Challenge - DOM</title>
+    <style>
+      /* http://meyerweb.com/eric/tools/css/reset/ 
+        v2.0 | 20110126
+        License: none (public domain)
+      */
+
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed, 
+      figure, figcaption, footer, header, hgroup, 
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video
+      {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article, aside, details, figcaption, figure, 
+      footer, header, hgroup, menu, nav, section 
+      {
+        display: block;
+      }
+
+      body 
+      {
+        line-height: 1;
+      }
+      ol, ul 
+      {
+        list-style: none;
+      }
+      blockquote, q 
+      {
+        quotes: none;
+      }
+      blockquote:before, blockquote:after,
+      q:before, q:after 
+      {
+        content: '';
+        content: none;
+      }
+      table 
+      {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+
+      body
+      {
+        background-color: rgb(210, 64, 255);
+      }
+
+      #kotak
+      {
+        margin: 35px auto auto auto;
+        height: 380px;
+        width: 350px;
+        background-color: white;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      #todo-title
+      {
+        font-weight: bold;
+        margin-top: 25px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 5px;
+        width: fit-content;
+        height: fit-content;
+        background-color: rgb(106, 255, 210);
+      }
+
+      #todo-subtitle
+      {
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        height: fit-content;
+      }
+
+      .container-for-input
+      {
+        margin-top: 5px;
+        display: inline-block;
+        align-self: center;
+      }
+
+      #todo-input
+      {
+        height: 25px;
+        width: 200px;
+        border: 1.1px solid black;
+      }
+
+      .container-for-output
+      {
+        margin-top: 25px;
+        margin-left: 20px;
+        height: max-content;
+        width: max-content;
+      }
+
+      #todo-output
+      {
+        margin: 0;
+        padding: 0;
+        list-style-type: disc;
+        list-style-position: inside;
+      }
+
+      li
+      {
+        padding: 5px 0;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
-      <!-- TODO: Buatlah sebuah header dengan id todo-title -->
-      <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+      <div id="kotak">
+        <h1 id="todo-title">To-Do List</h1>
 
-      <!-- Section: input -->
-      <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
-      <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
+        <h1 id="todo-subtitle">~ Today I need to ~</h1>
+        
+        <div class="container-for-input">
+          <input type="text" id="todo-input">
+          <button id="todo-submit">Submit</button>
+        </div>
 
-      <!-- Section output -->
-      <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+        <div class="container-for-output">
+          <ul id="todo-output"></ul>
+        </div>
+      </div>
     </div>
 
     <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
-    <script>
+    <script type="text/javascript">
       // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
-      let output;
+      let button = document.getElementById("todo-submit");
+      let input = document.getElementById("todo-input");
+      let output = document.getElementById("todo-output");
 
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+      function fnClickHandler(toDoItem) 
+      {
+        if(toDoItem.key === "Enter" || toDoItem.type === "click")
+        {
+          let list_order = document.createElement('li');
+  
+          list_order.append(input.value);
+  
+          output.appendChild(list_order);
+
+          input.value = "";
+        }
+      }
 
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
+      button.addEventListener('click', fnClickHandler);
       
       // TODO: register event onkeypress / addEventListener untuk input
       // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
+      input.addEventListener('keypress', fnClickHandler)
     </script>
   </body>
 </html>
